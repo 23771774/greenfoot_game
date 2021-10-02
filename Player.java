@@ -1,11 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.Scanner;
+import java.lang.System;
 /**
  * Write a description of class Player here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Diggaj Upadhyay 
+ * @version 20.09.2021
  */
+
 public class Player extends Actor
 {
     /**
@@ -14,15 +16,25 @@ public class Player extends Actor
      */
     public void act()
     {
-        // move player down, up, left, right by 2 pixels when the input is 
-        // given by the up,down,left right keys on the keyboard.
         if(Greenfoot.isKeyDown("down"))
-        setLocation(getX(), getY() +2);
+            setLocation(getX(), getY() +5);
         if(Greenfoot.isKeyDown("up"))
-        setLocation(getX(), getY() -2);
+            setLocation(getX(), getY() -5);
         if(Greenfoot.isKeyDown("right"))
-        setLocation(getX() +2, getY());
+            setLocation(getX() +5, getY());
         if(Greenfoot.isKeyDown("left"))
-        setLocation(getX() -2, getY());
+            setLocation(getX() -5, getY());
+        
+        if(isTouching(Food.class) != false)
+        {
+            getWorld().removeObject(getOneIntersectingObject(Food.class));
+            Counter.addScore(Food.getPoints());
+        }
+        if(isTouching(Enemy.class) != false)
+        {
+            getWorld().removeObject(getOneIntersectingObject(Enemy.class));
+            Counter.addScore(-10);
+        }
     }
+
 }
